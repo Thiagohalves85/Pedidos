@@ -29,7 +29,7 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid, Vcl.Mask,
   System.IniFiles, cxContainer, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, frxClass,
-  frxPreview, frxDBSet, frxBarcode;
+  frxPreview, frxDBSet, frxBarcode, dxGDIPlusClasses;
 
 type
   TForm1 = class(TForm)
@@ -38,7 +38,6 @@ type
     con1: TUniConnection;
     intrbsnprvdr1: TInterBaseUniProvider;
     qry1: TUniQuery;
-    qry2: TUniQuery;
     pgcPrincipal: TPageControl;
     tsProduto: TTabSheet;
     tsPedido: TTabSheet;
@@ -150,12 +149,18 @@ type
     btnExcluirProduto: TSpeedButton;
     btnExcluirCliente: TSpeedButton;
     pnlInicio: TPanel;
-    memoInicio: TRichEdit;
     frxBarCodeObject1: TfrxBarCodeObject;
     btnCancelarPedido: TSpeedButton;
     mniSair1: TMenuItem;
     statPrincipal: TStatusBar;
     lblTeste: TLabel;
+    qryToatalItens: TUniQuery;
+    frdsTotalItens: TfrxDBDataset;
+    qryToatalItensVALORTOTAL: TFloatField;
+    imgInicio: TImage;
+    lbl2: TLabel;
+    mniSobre1: TMenuItem;
+    mniSistema1: TMenuItem;
     procedure mniCliente1Click(Sender: TObject);
     procedure mniProduto1Click(Sender: TObject);
     procedure mniPedido1Click(Sender: TObject);
@@ -193,6 +198,7 @@ type
     procedure btnCancelarPedidoClick(Sender: TObject);
     procedure mniSair1Click(Sender: TObject);
     procedure cbbPesquisarProdutoEnter(Sender: TObject);
+    procedure mniSistema1Click(Sender: TObject);
   private
     FIdItemPedido: Integer;
     FIdParcela: Integer;
@@ -214,7 +220,7 @@ implementation
 {$R *.dfm}
 
 uses
-UModel, UControl;
+UModel, UControl, USobre;
 
 procedure TForm1.btnAlterarClienteClick(Sender: TObject);
 var
@@ -296,6 +302,7 @@ begin
   seQuantidade.Value := StrToIntDef(grdItensPedido.Columns.Items[4].Field.Text,0);
   txtTotalItem.Text := grdItensPedido.Columns.Items[5].Field.Text;
   FIdItemPedido := StrToInt(grdItensPedido.Columns.Items[0].Field.Text);
+  btnAlterarItens.Visible := True;
   pgcPrincipal.ActivePage := tsItemPedido;
 end;
 
@@ -374,6 +381,7 @@ procedure TForm1.btnNovoItemClick(Sender: TObject);
 begin
   pnlTitulo.Caption := 'Item';
   lblNumPedido.Caption := txtNumeroPedido.Text;
+  btnAlterarItens.Visible := False;
   qryProduto.Open;
   pgcPrincipal.ActivePage := tsItemPedido;
 end;
@@ -766,6 +774,15 @@ begin
    Application.Terminate;
 end;
 
+procedure TForm1.mniSistema1Click(Sender: TObject);
+var
+sobre: TfrmSobre;
+begin
+  sobre:= TfrmSobre.Create(nil);
+  sobre.ShowModal;
+  FreeAndNil(sobre);
+end;
+
 procedure TForm1.sePagamentoChange(Sender: TObject);
 var
 data: TDateTime;
@@ -856,6 +873,10 @@ begin
        qryItensNotas.ParamByName('ID').AsInteger := pedido.Id;
        qryItensNotas.Open;
        qryItensNotas.Execute;
+       qryToatalItens.Close;
+       qryToatalItens.ParamByName('ID').AsInteger := pedido.Id;
+       qryToatalItens.Open;
+       qryToatalItens.Execute;
        frxNota.PrepareReport();
        frxNota.ShowReport();
      end;

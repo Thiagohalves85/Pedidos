@@ -23,8 +23,6 @@ object Form1: TForm1
     Width = 829
     Height = 24
     Panels = <>
-    ExplicitLeft = -8
-    ExplicitTop = 462
   end
   object pnlPrincipal: TPanel
     Left = 0
@@ -33,7 +31,6 @@ object Form1: TForm1
     Height = 456
     Align = alClient
     TabOrder = 0
-    ExplicitTop = -6
     object pnlTitulo: TPanel
       Left = 1
       Top = 1
@@ -57,12 +54,9 @@ object Form1: TForm1
       ActivePage = tsPedido
       Align = alClient
       TabOrder = 1
-      ExplicitHeight = 437
       object tsProduto: TTabSheet
         Caption = 'tsProduto'
         TabVisible = False
-        ExplicitLeft = 8
-        ExplicitTop = 5
         object Label2: TLabel
           Left = 24
           Top = 79
@@ -619,9 +613,6 @@ object Form1: TForm1
         ImageIndex = 1
         TabVisible = False
         OnShow = tsPedidoShow
-        ExplicitLeft = 8
-        ExplicitTop = 24
-        ExplicitHeight = 409
         object btnNovoItem: TSpeedButton
           Left = 688
           Top = 60
@@ -970,7 +961,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 232
+          Left = 278
           Top = 50
           Width = 27
           Height = 19
@@ -983,9 +974,9 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 383
+          Left = 429
           Top = 50
-          Width = 95
+          Width = 39
           Height = 19
           Caption = 'Email'
           Font.Charset = DEFAULT_CHARSET
@@ -1376,7 +1367,7 @@ object Form1: TForm1
         object cbbCliente: TDBLookupComboBox
           Left = 17
           Top = 70
-          Width = 191
+          Width = 239
           Height = 27
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -1393,10 +1384,10 @@ object Form1: TForm1
           OnExit = cbbClienteExit
         end
         object txtCpf: TMaskEdit
-          Left = 232
+          Left = 278
           Top = 70
           Width = 124
-          Height = 28
+          Height = 27
           Enabled = False
           EditMask = '000.000.000-00;0;_'
           Font.Charset = DEFAULT_CHARSET
@@ -1410,7 +1401,7 @@ object Form1: TForm1
           Text = ''
         end
         object txtEmail: TEdit
-          Left = 383
+          Left = 429
           Top = 70
           Width = 249
           Height = 27
@@ -1484,7 +1475,7 @@ object Form1: TForm1
           object Label11: TLabel
             Left = 3
             Top = 16
-            Width = 85
+            Width = 81
             Height = 19
             Caption = 'Quantidade'
             Font.Charset = DEFAULT_CHARSET
@@ -1546,9 +1537,6 @@ object Form1: TForm1
         Caption = 'tsItemPedido'
         ImageIndex = 2
         TabVisible = False
-        ExplicitLeft = 8
-        ExplicitTop = 24
-        ExplicitHeight = 409
         object lblNumPedido: TLabel
           Left = 24
           Top = 24
@@ -2111,11 +2099,10 @@ object Form1: TForm1
         ImageIndex = 3
         TabVisible = False
         OnShow = tsClienteShow
-        ExplicitTop = 24
-        ExplicitHeight = 402
+        ExplicitLeft = 0
         object Label8: TLabel
-          Left = 16
-          Top = 54
+          Left = 18
+          Top = 52
           Width = 27
           Height = 19
           Caption = 'CPF'
@@ -2128,7 +2115,7 @@ object Form1: TForm1
         end
         object Label9: TLabel
           Left = 16
-          Top = 102
+          Top = 106
           Width = 39
           Height = 19
           Caption = 'Email'
@@ -2583,10 +2570,42 @@ object Form1: TForm1
           ParentFont = False
           OnClick = btnExcluirClienteClick
         end
+        object grpNomeCliente: TGroupBox
+          Left = 16
+          Top = 3
+          Width = 304
+          Height = 45
+          Caption = 'Cliente'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          StyleElements = [seFont, seClient]
+          object cbbPesquisaCliente: TDBLookupComboBox
+            Left = 0
+            Top = 16
+            Width = 304
+            Height = 27
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            KeyField = 'ID'
+            ListField = 'NOME'
+            ListSource = dsCliente
+            ParentFont = False
+            TabOrder = 0
+            OnExit = cbbPesquisaClienteExit
+          end
+        end
         object txtClienteCpf: TMaskEdit
           Left = 16
-          Top = 69
-          Width = 129
+          Top = 74
+          Width = 133
           Height = 27
           EditMask = '000.000.000-00;0;_'
           Font.Charset = DEFAULT_CHARSET
@@ -2600,8 +2619,8 @@ object Form1: TForm1
           Text = ''
         end
         object txtClienteEmail: TEdit
-          Left = 16
-          Top = 120
+          Left = 18
+          Top = 126
           Width = 225
           Height = 27
           CharCase = ecLowerCase
@@ -2613,54 +2632,25 @@ object Form1: TForm1
           ParentFont = False
           TabOrder = 1
         end
-        object grpNomeCliente: TGroupBox
+        object txtClienteNome: TEdit
           Left = 16
-          Top = 5
-          Width = 225
-          Height = 45
-          Caption = 'Cliente'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 2
-          StyleElements = [seFont, seClient]
-          object txtClienteNome: TEdit
-            Left = 0
-            Top = 17
-            Width = 225
-            Height = 27
-            CharCase = ecUpperCase
-            TabOrder = 0
-          end
-        end
-        object cbbPesquisaCliente: TDBLookupComboBox
-          Left = 16
-          Top = 22
-          Width = 225
+          Top = 19
+          Width = 304
           Height = 27
+          CharCase = ecUpperCase
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
           Font.Name = 'Tahoma'
           Font.Style = []
-          KeyField = 'ID'
-          ListField = 'NOME'
-          ListSource = dsCliente
           ParentFont = False
           TabOrder = 3
-          OnExit = cbbPesquisaClienteExit
         end
       end
       object tsInicio: TTabSheet
         Caption = 'tsInicio'
         ImageIndex = 4
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 24
-        ExplicitHeight = 402
         object pnlInicio: TPanel
           Left = 0
           Top = 0
@@ -2668,10 +2658,6 @@ object Form1: TForm1
           Height = 403
           Align = alClient
           TabOrder = 0
-          ExplicitLeft = 424
-          ExplicitTop = 184
-          ExplicitWidth = 185
-          ExplicitHeight = 41
           object lblTeste: TLabel
             Left = 7
             Top = 375
@@ -2928,7 +2914,7 @@ object Form1: TForm1
           object lbl2: TLabel
             Left = 232
             Top = 255
-            Width = 289
+            Width = 274
             Height = 35
             Caption = 'Sistema de Pedidos'
             Font.Charset = DEFAULT_CHARSET
@@ -2946,18 +2932,9 @@ object Form1: TForm1
   object con1: TUniConnection
     ProviderName = 'InterBase'
     Port = 3050
-    Database = 'C:\Users\Acer\Documents\Projetos\Pedidos\BD\PEDIDOS.GDB'
-    SpecificOptions.Strings = (
-      
-        'InterBase.ClientLibrary=C:\Users\Acer\Documents\Projetos\Pedidos' +
-        '\BD\fbclient.dll')
-    Username = 'SYSDBA'
-    Server = 'localhost'
-    Connected = True
     LoginPrompt = False
     Left = 401
     Top = 9
-    EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
   end
   object intrbsnprvdr1: TInterBaseUniProvider
     Left = 449
@@ -3103,8 +3080,8 @@ object Form1: TForm1
   end
   object dsCliente: TDataSource
     DataSet = qryCliente
-    Left = 149
-    Top = 66
+    Left = 173
+    Top = 50
   end
   object frxNota: TfrxReport
     Version = '6.2.1'
@@ -3115,7 +3092,7 @@ object Form1: TForm1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44081.670791354200000000
-    ReportOptions.LastChange = 44082.966981539350000000
+    ReportOptions.LastChange = 44083.605515231480000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3160,6 +3137,13 @@ object Form1: TForm1
         DataSet = frdsNota
         DataSetName = 'frdsNota'
         RowCount = 0
+        object Shape22: TfrxShapeView
+          AllowVectorExport = True
+          Top = 87.488250000000000000
+          Width = 718.110700000000000000
+          Height = 122.078740160000000000
+          Frame.Typ = []
+        end
         object Shape16: TfrxShapeView
           AllowVectorExport = True
           Left = 332.378170000000000000
@@ -3339,8 +3323,8 @@ object Form1: TForm1
         end
         object Memo10: TfrxMemoView
           AllowVectorExport = True
-          Left = 15.118120000000000000
-          Top = 188.212740000000000000
+          Left = 468.661720000000000000
+          Top = 112.622140000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '00000'
@@ -3376,7 +3360,7 @@ object Form1: TForm1
           AllowVectorExport = True
           Left = 7.559060000000000000
           Top = 213.448980000000000000
-          Width = 94.488250000000000000
+          Width = 151.181200000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
           Memo.UTF8W = (
@@ -3614,7 +3598,7 @@ object Form1: TForm1
         object BarCode1: TfrxBarCodeView
           AllowVectorExport = True
           Left = 472.441250000000000000
-          Top = 132.283550000000000000
+          Top = 141.283550000000000000
           Width = 129.000000000000000000
           Height = 60.472480000000000000
           BarType = bcCode39
@@ -3630,12 +3614,15 @@ object Form1: TForm1
           Font.Name = 'Arial'
           Font.Style = []
         end
-        object Shape22: TfrxShapeView
+        object Memo36: TfrxMemoView
           AllowVectorExport = True
-          Top = 87.488250000000000000
-          Width = 718.110700000000000000
-          Height = 122.078740157480000000
+          Left = 472.441250000000000000
+          Top = 94.488250000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
           Frame.Typ = []
+          Memo.UTF8W = (
+            'Nota N'#186)
         end
       end
       object MasterData2: TfrxMasterData
@@ -3920,7 +3907,6 @@ object Form1: TForm1
       'FROM NOTA N '
       'LEFT JOIN PEDIDO P ON P.ID = N.IDPEDIDO'
       'WHERE P.ID = :ID')
-    Active = True
     Left = 749
     Top = 130
     ParamData = <
@@ -3999,7 +3985,6 @@ object Form1: TForm1
       'FROM ITEMPEDIDO I'
       'LEFT JOIN PRODUTO PR ON I.IDPRODUTO = PR.ID '
       'WHERE I.IDPEDIDO = :ID')
-    Active = True
     Left = 757
     Top = 179
     ParamData = <

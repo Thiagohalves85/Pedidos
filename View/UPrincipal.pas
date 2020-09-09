@@ -29,7 +29,7 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid, Vcl.Mask,
   System.IniFiles, cxContainer, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, frxClass,
-  frxPreview, frxDBSet, frxBarcode, dxGDIPlusClasses;
+  frxPreview, frxDBSet, frxBarcode, dxGDIPlusClasses, math;
 
 type
   TForm1 = class(TForm)
@@ -113,8 +113,6 @@ type
     mniPesquisar1: TMenuItem;
     mniCliente2: TMenuItem;
     grpNomeCliente: TGroupBox;
-    txtClienteNome: TEdit;
-    cbbPesquisaCliente: TDBLookupComboBox;
     mniProduto2: TMenuItem;
     grpProduto: TGroupBox;
     cbbPesquisarProduto: TDBLookupComboBox;
@@ -161,6 +159,8 @@ type
     lbl2: TLabel;
     mniSobre1: TMenuItem;
     mniSistema1: TMenuItem;
+    txtClienteNome: TEdit;
+    cbbPesquisaCliente: TDBLookupComboBox;
     procedure mniCliente1Click(Sender: TObject);
     procedure mniProduto1Click(Sender: TObject);
     procedure mniPedido1Click(Sender: TObject);
@@ -620,17 +620,20 @@ end;
 procedure TForm1.Conectar;
 var
 Arquivo: TIniFile;
+teste, cabecalho: string;
 begin
   try
-    arquivo := TIniFile.Create(ExtractFilePath(Application.ExeName)+'\db.ini');
+    cabecalho := 'PEDIDOS';
+    arquivo := TIniFile.Create(ExtractFilePath(Application.ExeName)+'db.ini');
     if con1.Connected = False then
     begin
-      con1.ProviderName := arquivo.ReadString('RECIBO','PROVIDER',con1.ProviderName);
-      con1.Server := arquivo.ReadString('RECIBO','SERVER',con1.Server);
-      con1.Port := StrToInt(arquivo.ReadString('RECIBO','PORTA',IntToStr(con1.Port)));
-      con1.Username := arquivo.ReadString('RECIBO','USUARIO',con1.Username);
-      con1.Password := arquivo.ReadString('RECIBO','SENHA',con1.Password);
-      con1.Database := arquivo.ReadString('RECIBO','DATABASE',con1.Database);
+      teste := arquivo.ReadString(cabecalho,'PROVIDER',con1.ProviderName);
+      con1.ProviderName := arquivo.ReadString(cabecalho,'PROVIDER',con1.ProviderName);
+      con1.Server := arquivo.ReadString(cabecalho,'SERVER',con1.Server);
+      con1.Port := StrToInt(arquivo.ReadString(cabecalho,'PORTA',IntToStr(con1.Port)));
+      con1.Username := arquivo.ReadString(cabecalho,'USUARIO',con1.Username);
+      con1.Password := arquivo.ReadString(cabecalho,'SENHA',con1.Password);
+      con1.Database := arquivo.ReadString(cabecalho,'DATABASE',con1.Database);
       con1.SpecificOptions.Values['ClientLibrary'] := ExtractFilePath(Application.ExeName)+'\fbclient.dll';
       con1.Connect;
     end;
@@ -650,10 +653,10 @@ var
 arquivo: TIniFile;
 cabecalho, base : string;
 begin
-  base := ExtractFilePath(Application.ExeName)+'\BD\PEDIDOS.GDB';
+  base := ExtractFilePath(Application.ExeName)+'PEDIDOS.GDB';
   lblTeste.Caption := base;
   cabecalho := 'PEDIDOS';
-  arquivo := TIniFile.Create(ExtractFilePath(Application.ExeName)+'\db.ini');
+  arquivo := TIniFile.Create(ExtractFilePath(Application.ExeName)+'db.ini');
   arquivo.WriteString(UpperCase(cabecalho),'PROVIDER','InterBase');
   arquivo.WriteString(UpperCase(cabecalho),'SERVER','localhost');
   arquivo.WriteString(UpperCase(cabecalho),'PORTA','3050');
@@ -699,7 +702,8 @@ begin
   btnSalvarCliente.Visible := True;
   btnAlterarCliente.Visible := False;
   btnExcluirCliente.Visible := False;
-  cbbPesquisaCliente.Visible := False;
+  grpNomeCliente.SendToBack;
+  txtClienteNome.BringToFront;
   pgcPrincipal.ActivePage := tsCliente;
 end;
 
@@ -709,7 +713,9 @@ begin
   btnSalvarCliente.Visible := False;
   btnAlterarCliente.Visible := True;
   btnExcluirCliente.Visible := True;
-  cbbPesquisaCliente.Visible := True;
+  qryCliente.Open;
+  grpNomeCliente.BringToFront;
+  txtClienteNome.SendToBack;
   pgcPrincipal.ActivePage := tsCliente;
 end;
 
@@ -727,6 +733,7 @@ begin
   txtNumeroPedido.Text := control.NovoPedido(spPedido);
   txtNumeroPedido.Enabled := False;
   FreeAndNil(control);
+  btnPesquisarPedido.Visible := False;
   pnlTitulo.Caption := 'PEDIDO';
   pgcPrincipal.ActivePage:= tsPedido;
 end;
@@ -738,8 +745,10 @@ begin
   txtNumeroPedido.Text := EmptyStr;
   txtNumeroPedido.Enabled := True;
   btnPesquisarPedido.Visible := True;
+  btnPesquisarPedido.Visible := True;
   LimparPedido();
   pgcPrincipal.ActivePage := tsPedido;
+
 end;
 
 procedure TForm1.mniProduto1Click(Sender: TObject);
@@ -794,7 +803,7 @@ begin
   for I := 1 to sePagamento.Value do
   begin
     data := IncMonth(I);
-    valor := CurrToStr(StrToCurr(txtTotalPedido.Text)/sePagamento.Value);
+    valor := CurrToStr(SimpleRoundTo(StrToCurr(txtTotalPedido.Text)/sePagamento.Value));
     lstPagamento.Items.Add('Data: '+DateToStr(data)+' - Valor: '+ valor);
   end;
 end;
