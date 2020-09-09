@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/09/11 22:10:27.000.825,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/04 11:57:37.000.023,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/16 19:32:01.000.866,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/16 20:17:59.000.438,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/16 20:30:43.000.142,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/16 20:32:15.000.740,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/16 20:33:51.000.648,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/17 19:13:18.000.752,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/09/24 10:56:18.000.774,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/03/24 09:42:35.000.495,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/09/01 19:20:43.000.172,=C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/09/02 14:54:15.000.471,C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Acer\Documents\Projetos\Pedidos\View\UPrincipal.dfm</Transaction>
+    <Transaction>2020/09/02 14:54:15.000.471,C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Acer\Documents\Projetos\Pedidos\View\UPrincipal.pas</Transaction>
+    <Transaction>2020/09/02 14:54:27.000.267,C:\Users\Acer\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Acer\Documents\Projetos\Pedidos\Pedidos.dproj</Transaction>
+    <Transaction>2020/09/03 22:07:36.000.470,=C:\Users\Acer\Documents\Projetos\Pedidos\Unit1.pas</Transaction>
+    <Transaction>2020/09/03 22:08:00.000.317,C:\Users\Acer\Documents\Projetos\Pedidos\Unit1.pas=C:\Users\Acer\Documents\Projetos\Pedidos\Model\UModel.pas</Transaction>
+    <Transaction>2020/09/03 22:33:36.000.557,=C:\Users\Acer\Documents\Projetos\Pedidos\Unit1.pas</Transaction>
+    <Transaction>2020/09/03 22:33:55.000.668,C:\Users\Acer\Documents\Projetos\Pedidos\Unit1.pas=C:\Users\Acer\Documents\Projetos\Pedidos\Control\UControl.pas</Transaction>
+    <Transaction>2020/09/06 21:35:03.000.857,=C:\Users\Acer\Documents\Projetos\Pedidos\Unit2.pas</Transaction>
+    <Transaction>2020/09/06 21:35:36.000.235,C:\Users\Acer\Documents\Projetos\Pedidos\View\UPedidos.dfm=C:\Users\Acer\Documents\Projetos\Pedidos\Unit2.dfm</Transaction>
+    <Transaction>2020/09/06 21:35:36.000.235,C:\Users\Acer\Documents\Projetos\Pedidos\View\UPedidos.pas=C:\Users\Acer\Documents\Projetos\Pedidos\Unit2.pas</Transaction>
+    <Transaction>2020/09/06 21:42:09.000.571,C:\Users\Acer\Documents\Projetos\Pedidos\View\UPedidos.pas=</Transaction>
+    <Transaction>2020/09/08 23:21:48.364,=C:\Users\Acer\Documents\Projetos\Pedidos\Unit2.pas</Transaction>
+    <Transaction>2020/09/08 23:24:56.368,C:\Users\Acer\Documents\Projetos\Pedidos\View\USobre.pas=C:\Users\Acer\Documents\Projetos\Pedidos\Unit2.pas</Transaction>
+    <Transaction>2020/09/08 23:24:56.368,C:\Users\Acer\Documents\Projetos\Pedidos\View\USobre.dfm=C:\Users\Acer\Documents\Projetos\Pedidos\Unit2.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

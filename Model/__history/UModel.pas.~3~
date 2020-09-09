@@ -1,0 +1,228 @@
+unit UModel;
+
+interface
+
+type Produto = class
+  private
+    FValor: Currency;
+    FDescricao: string;
+    FId: Integer;
+    procedure SetDescricao(const Value: string);
+    procedure SetId(const Value: Integer);
+    procedure SetValor(const Value: Currency);
+  public
+  property Id: Integer read FId write SetId;
+  property Descricao: string read FDescricao write SetDescricao;
+  property Valor: Currency read FValor write SetValor;
+end;
+
+type Pedido = class
+  private
+  FNumPedido: Integer;
+    FTotalPedido: Currency;
+    FIdCliente: Integer;
+    FReferencia: string;
+    FTipoOperacao: string;
+    FDtEmissao: TDateTime;
+  public
+    procedure SetDtEmissao(const Value: TDateTime);
+    procedure SetIdCliente(const Value: Integer);
+    procedure SetNumPedido(const Value: Integer);
+    procedure SetReferencia(const Value: string);
+    procedure SetTipoOperacao(const Value: string);
+    procedure SetTotalPedido(const Value: Currency);
+    property Id: Integer;
+    property Referencia: string read FReferencia write SetReferencia;
+    property NumPedido: Integer read FNumPedido write SetNumPedido;
+    property DtEmissao: TDateTime read FDtEmissao write SetDtEmissao;
+    property IdCliente: Integer read FIdCliente write SetIdCliente;
+    property TipoOperacao: string read FTipoOperacao write SetTipoOperacao;
+    Property TotalPedido: Currency read FTotalPedido write SetTotalPedido;
+end;
+
+type ItemPedido = class
+  private
+    FTotalItem: Currency;
+    FIdProduto: Integer;
+    FId: Integer;
+    FIdPedido: Integer;
+    FQuantidade: Integer;
+    procedure SetId(const Value: Integer);
+    procedure SetIdPedido(const Value: Integer);
+    procedure SetIdProduto(const Value: Integer);
+    procedure SetQuantidade(const Value: Integer);
+    procedure SetTotalItem(const Value: Currency);
+  public
+  property Id: Integer read FId write SetId;
+  property TotalItem: Currency read FTotalItem write SetTotalItem;
+  property Quantidade: Integer read FQuantidade write SetQuantidade;
+  property IdProduto: Integer read FIdProduto write SetIdProduto;
+  property  IdPedido: Integer read FIdPedido write SetIdPedido;
+
+type Parcela = class
+  private
+        FValor: Currency;
+        FId: Integer;
+        FPagamento: string;
+        FIdPedido: Integer;
+        FDtVencimento: TDateTime;
+        procedure SetDtVencimento(const Value: TDateTime);
+        procedure SetId(const Value: Integer);
+        procedure SetIdPedido(const Value: Integer);
+        procedure SetPagamento(const Value: string);
+        procedure SetValor(const Value: Currency);
+  public
+  property Id: Integer read FId write SetId;
+  property IdPedido: Integer read FIdPedido write SetIdPedido;
+  property Pagamento: string read FPagamento write SetPagamento;
+  property DtVencimento: TDateTime read FDtVencimento write SetDtVencimento;
+  property Valor: Currency read FValor write SetValor;
+end;
+
+type Cliente = class
+  private
+        FEmail: string;
+        FCpf: string;
+        FId: Integer;
+        FNome: string;
+        procedure SetCpf(const Value: string);
+        procedure SetEmail(const Value: string);
+        procedure SetId(const Value: Integer);
+        procedure SetNome(const Value: string);
+  public
+  property Id: Integer read FId write SetId;
+  property Nome: string read FNome write SetNome;
+  property Cpf: string read FCpf write SetCpf;
+  property Email: string read FEmail write SetEmail;
+end;
+
+end;
+
+implementation
+
+{ Produto }
+
+procedure Produto.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure Produto.SetId(const Value: Integer);
+begin
+  FId := Value;
+end;
+
+procedure Produto.SetValor(const Value: Currency);
+begin
+  FValor := Value;
+end;
+
+{ Pedido }
+
+procedure Pedido.SetDtEmissao(const Value: TDateTime);
+begin
+  FDtEmissao := Value;
+end;
+
+procedure Pedido.SetIdCliente(const Value: Integer);
+begin
+  FIdCliente := Value;
+end;
+
+procedure Pedido.SetNumPedido(const Value: Integer);
+begin
+  FNumPedido := Value;
+end;
+
+procedure Pedido.SetReferencia(const Value: string);
+begin
+  FReferencia := Value;
+end;
+
+procedure Pedido.SetTipoOperacao(const Value: string);
+begin
+  FTipoOperacao := Value;
+end;
+
+procedure Pedido.SetTotalPedido(const Value: Currency);
+begin
+  FTotalPedido := Value;
+end;
+
+{ ItemPedido }
+
+procedure ItemPedido.SetId(const Value: Integer);
+begin
+  FId := Value;
+end;
+
+procedure ItemPedido.SetIdPedido(const Value: Integer);
+begin
+  FIdPedido := Value;
+end;
+
+procedure ItemPedido.SetIdProduto(const Value: Integer);
+begin
+  FIdProduto := Value;
+end;
+
+procedure ItemPedido.SetQuantidade(const Value: Integer);
+begin
+  FQuantidade := Value;
+end;
+
+procedure ItemPedido.SetTotalItem(const Value: Currency);
+begin
+  FTotalItem := Value;
+end;
+
+{ ItemPedido.Parcela }
+
+procedure ItemPedido.Parcela.SetDtVencimento(const Value: TDateTime);
+begin
+  FDtVencimento := Value;
+end;
+
+procedure ItemPedido.Parcela.SetId(const Value: Integer);
+begin
+  FId := Value;
+end;
+
+procedure ItemPedido.Parcela.SetIdPedido(const Value: Integer);
+begin
+  FIdPedido := Value;
+end;
+
+procedure ItemPedido.Parcela.SetPagamento(const Value: string);
+begin
+  FPagamento := Value;
+end;
+
+procedure ItemPedido.Parcela.SetValor(const Value: Currency);
+begin
+  FValor := Value;
+end;
+
+{ ItemPedido.Cliente }
+
+procedure ItemPedido.Cliente.SetCpf(const Value: string);
+begin
+  FCpf := Value;
+end;
+
+procedure ItemPedido.Cliente.SetEmail(const Value: string);
+begin
+  FEmail := Value;
+end;
+
+procedure ItemPedido.Cliente.SetId(const Value: Integer);
+begin
+  FId := Value;
+end;
+
+procedure ItemPedido.Cliente.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+end.
