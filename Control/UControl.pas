@@ -105,6 +105,7 @@ begin
         qry.ParamByName('IDPRODUTO').AsInteger := item.IdProduto;
         qry.ParamByName('IDPEDIDO').AsInteger := item.IdPedido;
         qry.ParamByName('ID').AsInteger := item.Id;
+
         qry.ExecSQL;
 
         qry.SQL.Clear;

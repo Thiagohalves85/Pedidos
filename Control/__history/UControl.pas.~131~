@@ -8,7 +8,7 @@ Uni, UModel;
 type TControl = class
   public
    // Funções de Produtos
-  function gravarProduto(qry: TUniQuery; produto: TProduto): Boolean;
+  function gravarProduto(qry: TUniQuery; produto: TProduto; out erro: string): Boolean;
   function alterarProduto(qry:TUniQuery; produto: TProduto; out erro: string):Boolean;
   function excluirProduto(qry:TUniQuery; produto: TProduto; out erro: string):Boolean;
   procedure CarregaDadosProduto(qry:TUniQuery; id:Integer; out valor: Currency; out quantidade: Integer);
@@ -34,11 +34,6 @@ type TControl = class
   function getQuantidadeParcela(qry: TUniQuery; lst: TListBox; id:Integer):Integer;
   // Funções de Notas
   function gerarNota(qry: TUniQuery; id: Integer; out erro: string):Boolean;
-  function pesquisarNotaNumero(qry: TUniQuery): Boolean;
-
-
-
-
 end;
 
 implementation
@@ -85,7 +80,7 @@ begin
         qry.SQL.Text := ' SELECT QUANTIDADE FROM ITEMPEDIDO WHERE ID = :ID ';
         qry.ParamByName('ID').AsInteger := item.Id;
         qry.Open;
-
+        quantidade := 0;
         if qry.FieldByName('QUANTIDADE').AsInteger > item.Quantidade then
         begin
           quantidade := qry.FieldByName('QUANTIDADE').AsInteger - item.Quantidade;
@@ -114,7 +109,7 @@ begin
 
         qry.SQL.Clear;
         qry.SQL.Text :=  ' EXECUTE PROCEDURE SP_ATUALIZA_QUANTIDADE_PRODUTO( :QUANTIDADE, :IDPRODUTO, :CONDICAO) ';
-        qry.ParamByName('QUANTIDADE').AsInteger := Quantidade;
+        qry.ParamByName('QUANTIDADE').AsInteger := quantidade;
         qry.ParamByName('IDPRODUTO').AsInteger := item.Id;
         qry.ParamByName('CONDICAO').AsString := condicao;
         qry.ExecSQL ;
@@ -467,10 +462,36 @@ begin
   end;
 end;
 
-function TControl.gravarProduto(qry: TUniQuery; produto: TProduto): Boolean;
+function TControl.gravarProduto(qry: TUniQuery; produto: TProduto; out erro: string): Boolean;
 begin
   Result := False;
   try
+    if produto.Valor <= 0 then
+     begin
+       Result := False;
+       erro := 'Produto '+produto.Descricao+' esta sem valor!';
+       Exit;
+     end;
+
+     if produto.Quantidade <= 0 then
+     begin
+       Result := False;
+       erro := 'Produto '+produto.Descricao+' esta sem quantidade!';
+       Exit;
+     end;
+
+    qry.SQL.Text :=
+    ' SELECT DESCRICAO FROM PRODUTO '+
+    ' WHERE DESCRICAO = :DESCRICAO';
+    qry.ParamByName('DESCRICAO').AsString := produto.Descricao;
+    qry.Open;
+    if not qry.IsEmpty then
+    begin
+      Result := False;
+      erro := 'Produto '+produto.Descricao+' já cadastrado!';
+      Exit;
+    end;
+
     qry.SQL.Text :=
     ' INSERT INTO PRODUTO                      '+
     ' (DESCRICAO, VALOR, QUANTIDADE)           '+
@@ -482,7 +503,11 @@ begin
     qry.ExecSQL;
     Result := True
   except
-    Result := False;
+    on E: Exception do
+    begin
+      erro := e.Message;
+      Result := False;
+    end;
   end;
 end;
 
@@ -497,11 +522,6 @@ begin
     Result := FormatFloat('00000',spPedido.ParamByName('NUMEROPEDIDO').AsInteger);
 end;
 
-
-function TControl.pesquisarNotaNumero(qry: TUniQuery): Boolean;
-begin
-  qry.SQL.Text :=
-end;
 
 function TControl.valorItemPedido(key, qtd:Integer; query: TUniQuery): Currency;
 begin
