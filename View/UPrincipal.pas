@@ -748,7 +748,6 @@ begin
   btnPesquisarPedido.Visible := True;
   LimparPedido();
   pgcPrincipal.ActivePage := tsPedido;
-
 end;
 
 procedure TForm1.mniProduto1Click(Sender: TObject);
